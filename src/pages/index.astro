@@ -45,7 +45,10 @@ import profilePicture from '../assets/profile-picture.png'
                             <button type="button" id="resume-close" class="p-1 text-xl leading-none opacity-70 transition-opacity hover:opacity-100" aria-label="Close resume">&times;</button>
                         </div>
                     </div>
-                    <iframe data-src="/Komang David Dananjaya Suartana - Resume.pdf" title="Komang David's resume" class="block min-h-0 w-full flex-1 border-0"></iframe>
+                    <div id="resume-pages" class="min-h-0 flex-1 overflow-auto bg-black/20 p-2 sm:p-4">
+                        <img src="/resume/page-1.webp" alt="Resume, page 1" class="mx-auto mb-3 block w-full max-w-[850px] bg-white shadow-lg" />
+                        <img src="/resume/page-2.webp" alt="Resume, page 2" class="mx-auto block w-full max-w-[850px] bg-white shadow-lg" />
+                    </div>
                 </div>
             </dialog>
             <script>
@@ -53,14 +56,7 @@ import profilePicture from '../assets/profile-picture.png'
                 const resumeDialog = document.querySelector<HTMLDialogElement>('#resume-dialog');
                 const resumeClose = document.querySelector<HTMLButtonElement>('#resume-close');
 
-                resumeButton?.addEventListener('click', () => {
-                    const resumeFrame = resumeDialog?.querySelector<HTMLIFrameElement>('iframe');
-                    if (resumeFrame && resumeFrame.dataset.loaded !== 'true') {
-                        resumeFrame.src = resumeFrame.dataset.src ?? '';
-                        resumeFrame.dataset.loaded = 'true';
-                    }
-                    resumeDialog?.showModal();
-                });
+                resumeButton?.addEventListener('click', () => resumeDialog?.showModal());
                 resumeClose?.addEventListener('click', () => resumeDialog?.close());
                 resumeDialog?.addEventListener('click', (event) => {
                     if (event.target === resumeDialog) resumeDialog.close();

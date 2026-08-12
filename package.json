@@ -6,6 +6,8 @@
     "node": ">=22.12.0"
   },
   "scripts": {
+    "render-resume": "node scripts/render-resume.mjs",
+    "prepare": "node scripts/setup-git-hooks.mjs",
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
@@ -25,5 +27,9 @@
   },
   "overrides": {
     "vite": "^7"
+  },
+  "devDependencies": {
+    "@napi-rs/canvas": "^1.0.5",
+    "pdfjs-dist": "^6.2.108"
   }
 }
