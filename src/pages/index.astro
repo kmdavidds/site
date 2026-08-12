@@ -45,7 +45,7 @@ import profilePicture from '../assets/profile-picture.png'
                             <button type="button" id="resume-close" class="p-1 text-xl leading-none opacity-70 transition-opacity hover:opacity-100" aria-label="Close resume">&times;</button>
                         </div>
                     </div>
-                    <iframe src="/Komang David Dananjaya Suartana - Resume.pdf" title="Komang David's resume" class="block min-h-0 w-full flex-1 border-0"></iframe>
+                    <iframe data-src="/Komang David Dananjaya Suartana - Resume.pdf" title="Komang David's resume" class="block min-h-0 w-full flex-1 border-0"></iframe>
                 </div>
             </dialog>
             <script>
@@ -53,7 +53,14 @@ import profilePicture from '../assets/profile-picture.png'
                 const resumeDialog = document.querySelector<HTMLDialogElement>('#resume-dialog');
                 const resumeClose = document.querySelector<HTMLButtonElement>('#resume-close');
 
-                resumeButton?.addEventListener('click', () => resumeDialog?.showModal());
+                resumeButton?.addEventListener('click', () => {
+                    const resumeFrame = resumeDialog?.querySelector<HTMLIFrameElement>('iframe');
+                    if (resumeFrame && resumeFrame.dataset.loaded !== 'true') {
+                        resumeFrame.src = resumeFrame.dataset.src ?? '';
+                        resumeFrame.dataset.loaded = 'true';
+                    }
+                    resumeDialog?.showModal();
+                });
                 resumeClose?.addEventListener('click', () => resumeDialog?.close());
                 resumeDialog?.addEventListener('click', (event) => {
                     if (event.target === resumeDialog) resumeDialog.close();
