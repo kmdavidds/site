@@ -29,11 +29,36 @@ import profilePicture from '../assets/profile-picture.png'
                     <a href="mailto:kmdavidds@gmail.com" class="bg-night p-2 scale-150 rounded-lg transition-all duration-300 hover:brightness-200" title="Email">
                         <Icon name="simple-icons:gmail"/>
                     </a>
-                    <a href="/Komang David Dananjaya Suartana - Resume.pdf" target="_blank" class="bg-night p-2 scale-150 rounded-lg transition-all duration-300 hover:brightness-200" title="Resume">
-                        <Icon name="lucide:file-text"/>
-                    </a>
+                    <button type="button" id="resume-button" class="bg-night p-2 scale-150 rounded-lg transition-all duration-300 hover:brightness-200" title="Resume" aria-label="Open resume">
+                        <Icon name="lucide:file-text" />
+                    </button>
                 </div>
             </section>
+            <dialog id="resume-dialog" class="m-auto h-[calc(100dvh-1rem)] w-[calc(100%-1rem)] max-w-none overflow-hidden rounded-lg bg-night p-0 text-white shadow-2xl backdrop:bg-black/70 md:h-[90dvh] md:w-[min(1000px,calc(100%-2rem))]">
+                <div class="flex h-full min-h-0 flex-col">
+                    <div class="flex shrink-0 items-center justify-between gap-4 border-b border-white/10 px-3 py-3 sm:px-4">
+                        <h2 class="text-sm font-medium">Resume</h2>
+                        <div class="flex items-center gap-3 sm:gap-4">
+                            <a href="/Komang David Dananjaya Suartana - Resume.pdf" target="_blank" rel="noopener noreferrer" class="p-1 opacity-70 transition-opacity hover:opacity-100" title="Open resume in new tab" aria-label="Open resume in new tab">
+                                <Icon name="lucide:external-link" size="16" />
+                            </a>
+                            <button type="button" id="resume-close" class="p-1 text-xl leading-none opacity-70 transition-opacity hover:opacity-100" aria-label="Close resume">&times;</button>
+                        </div>
+                    </div>
+                    <iframe src="/Komang David Dananjaya Suartana - Resume.pdf" title="Komang David's resume" class="block min-h-0 w-full flex-1 border-0"></iframe>
+                </div>
+            </dialog>
+            <script>
+                const resumeButton = document.querySelector<HTMLButtonElement>('#resume-button');
+                const resumeDialog = document.querySelector<HTMLDialogElement>('#resume-dialog');
+                const resumeClose = document.querySelector<HTMLButtonElement>('#resume-close');
+
+                resumeButton?.addEventListener('click', () => resumeDialog?.showModal());
+                resumeClose?.addEventListener('click', () => resumeDialog?.close());
+                resumeDialog?.addEventListener('click', (event) => {
+                    if (event.target === resumeDialog) resumeDialog.close();
+                });
+            </script>
 		</main>
 	</body>
 </html>
